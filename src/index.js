@@ -16,7 +16,7 @@ const base = require('@high-standards-js/base');
         )
     );
 
-    packageJsonOfConfig = base.addDependency(packageJsonOfConfig, 'husky');
+    packageJsonOfConfig = await base.addDependency(packageJsonOfConfig, 'husky');
 
     if (!packageJsonOfConfig.husky) packageJsonOfConfig.husky = {};
     if (!packageJsonOfConfig.husky.hooks) packageJsonOfConfig.husky.hooks = {};
