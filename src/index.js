@@ -14,12 +14,12 @@ const base = require('@high-standards-js/base');
             __dirname, 
             'commitlint.config.js'
         )
-    )
+    );
 
     packageJsonOfConfig = base.addDependency(packageJsonOfConfig, 'husky');
 
     if (!packageJsonOfConfig.husky) packageJsonOfConfig.husky = {};
     if (!packageJsonOfConfig.husky.hooks) packageJsonOfConfig.husky.hooks = {};
-    
+
     base.writeInitiatingProjectPackageJson(packageJsonOfConfig);
 })()
