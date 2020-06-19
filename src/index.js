@@ -1,25 +1,23 @@
-const base = require('@high-standards-js/base');
+const base = require('@high-standards-js/base')
 
-(async() => {
-    await base.checkAcceptedHighStandards();
-
-    let packageJsonOfConfig = base.getInitiatingProjectPackageJson();
+function addHookCommand(packageJson, hookName, commandToAdd) {
+    commandToAdd = commandToAdd.trim();
+    if (!packageJson.husky) packageJson.husky = {};
+    if (!packageJson.husky.hooks) packageJson.husky.hooks = {};
+    if (!packageJson.husky.hooks[hookName]) packageJson.husky.hooks[hookName] = '';
     
-    if (!packageJsonOfConfig.engines) packageJsonOfConfig.engines = {};
-    if (!packageJsonOfConfig.engines.node) packageJsonOfConfig.engines.node = `>=${process.versions.node}`;
-    
-    base.writeFile(
-        'commitlint.config.js', 
-        base.getTemplate(
-            __dirname, 
-            'commitlint.config.js'
-        )
-    );
+    let commands = packageJson.husky.hooks[hookName].split('&&').map((singleCommand) => {
+        return singleCommand.trim();
+    });
 
-    packageJsonOfConfig = await base.addDependency(packageJsonOfConfig, 'husky');
+    if (!commands.includes(commandToAdd)) {
+        commands.push(commandToAdd);
+    }
 
-    if (!packageJsonOfConfig.husky) packageJsonOfConfig.husky = {};
-    if (!packageJsonOfConfig.husky.hooks) packageJsonOfConfig.husky.hooks = {};
+    packageJson.husky.hooks[hookName] = commands.join(' && ');
+    return packageJson;
+}
 
-    base.writeInitiatingProjectPackageJson(packageJsonOfConfig);
-})()
+module.exports = {
+    addHookCommand
+}
