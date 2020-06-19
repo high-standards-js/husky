@@ -6,9 +6,14 @@ function addHookCommand(packageJson, hookName, commandToAdd) {
     if (!packageJson.husky.hooks) packageJson.husky.hooks = {};
     if (!packageJson.husky.hooks[hookName]) packageJson.husky.hooks[hookName] = '';
     
-    let commands = packageJson.husky.hooks[hookName].split('&&').map((singleCommand) => {
-        return singleCommand.trim();
-    });
+    let commands = packageJson.husky.hooks[hookName]
+        .split('&&')
+        .map((singleCommand) => {
+            return singleCommand.trim();
+        })
+        .filter((singleCommand) => {
+            return singleCommand !== ''
+        });
 
     if (!commands.includes(commandToAdd)) {
         commands.push(commandToAdd);
