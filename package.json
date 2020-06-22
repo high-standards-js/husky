@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@high-standards-js/base": "^1.7.7"
+    "@high-standards-js/base": "^1.7.10"
   },
   "devDependencies": {
     "husky": "4.2.5",
