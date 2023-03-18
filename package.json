@@ -12,7 +12,7 @@
     "@high-standards-js/base": "^1.7.11"
   },
   "devDependencies": {
-    "husky": "4.2.5",
+    "husky": "8.0.3",
     "lint-staged": "10.2.11",
     "prettier": "2.0.5"
   },
